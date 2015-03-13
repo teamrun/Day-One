@@ -23,4 +23,27 @@ html,body{
     display: flex;
     height: 100%;
 }
+
+.viewChange-enter{
+    transform: translateY(-400px);
+    opacity: 0.1;
+    transition: all 200ms ease;
+    overflow: hidden;
+
+    &.viewChange-enter-active {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+.viewChange-leave{
+    transform: translateY(0px);
+    opacity: 1;
+    transition: all 200ms ease;
+    overflow: hidden;
+
+    &.viewChange-leave-active {
+        transform: translateY(400px);
+        opacity: 0.1;
+    }
+}
 @import "sub/nav.less";
