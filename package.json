@@ -16,6 +16,7 @@
   "dependencies": {
     "gulp": "^3.8.11",
     "immutable": "^3.6.4",
+    "jsx-loader": "^0.12.2",
     "lunar-calendar": "^0.1.4",
     "node-jsx": "^0.12.4",
     "react": "^0.12.2",
