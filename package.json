@@ -1,0 +1,24 @@
+{
+  "name": "start-kit",
+  "version": "0.0.1",
+  "description": "start kit",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/teamrun/start-kit.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "mit",
+  "dependencies": {
+    "gulp": "^3.8.11",
+    "immutable": "^3.6.4",
+    "lunar-calendar": "^0.1.4",
+    "node-jsx": "^0.12.4",
+    "react": "^0.12.2",
+    "react-router": "^0.12.4"
+  }
+}
