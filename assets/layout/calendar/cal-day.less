@@ -1,0 +1,36 @@
+.cal-day{
+    display: inline-block;
+    width: @dayW;
+    height: @dayH;
+    padding-right: 8px;
+    font-size: 16px;
+    // font-weight: bold;
+    text-align: right;
+    // line-height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    &:hover{
+        background-color: rgba(0,0,0,0.125);
+        // background-color: @themeColor;
+    }
+
+    &.day-1{
+        margin-left: 1*@dayW;
+    }
+    &.day-2{
+        margin-left: 2*@dayW;
+    }
+    &.day-3{
+        margin-left: 3*@dayW;
+    }
+    &.day-4{
+        margin-left: 4*@dayW;
+    }
+    &.day-5{
+        margin-left: 5*@dayW;
+    }
+    &.day-6{
+        margin-left: 6*@dayW;
+    }
+}

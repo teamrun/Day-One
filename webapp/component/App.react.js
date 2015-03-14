@@ -20,6 +20,9 @@ var App = React.createClass({
         var nodes = navItems.map(function(item){
             return <li><Link to={item.toLowerCase()} >{item}</Link></li>;
         });
+        /*<TransitionGroup component="main" transitionName="viewChange">
+                    <RouteHandler key={name}/>
+                </TransitionGroup>*/
         return (
             <div className="app">
                 <nav>
@@ -27,10 +30,9 @@ var App = React.createClass({
                         {nodes}
                     </ul>
                 </nav>
-
-                <TransitionGroup component="main" transitionName="viewChange">
+                <main>
                     <RouteHandler key={name}/>
-                </TransitionGroup>
+                </main>
             </div>
         );
     }

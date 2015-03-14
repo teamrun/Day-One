@@ -1,0 +1,26 @@
+.cal-weekbar{
+    position: fixed;
+    top: 0;
+    left: @navW;
+    right: 0;
+    height: @weekBarH;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+
+    .bar-content{
+        width: 7*@dayW;
+        height: @weekBarH;
+        margin: 0 auto;
+
+        .day-name{
+            display: inline-block;
+            width: @dayW;
+            height: 100%;
+            padding-right: 8px;
+            color: #999;
+            font-size: 14px;
+            line-height: @weekBarH;
+            text-align: right;
+        }
+    }
+}

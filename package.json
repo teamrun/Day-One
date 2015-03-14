@@ -14,6 +14,7 @@
   "author": "",
   "license": "mit",
   "dependencies": {
+    "classnames": "^1.1.4",
     "gulp": "^3.8.11",
     "immutable": "^3.6.4",
     "jsx-loader": "^0.12.2",

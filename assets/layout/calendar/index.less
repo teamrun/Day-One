@@ -1,0 +1,13 @@
+@dayW: 80px;
+@dayH: 40px;
+
+@weekBarH: 26px;
+
+.calendar-view{
+    padding-top: @weekBarH;
+    overflow: hidden;    // bfc
+}
+
+@import "./cal-month.less";
+@import "./cal-day.less";
+@import "./cal-weekbar.less";

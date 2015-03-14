@@ -6,13 +6,13 @@ var Router = require('react-router');
 var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
 
-var Calender = require('./component/Calender');
+var Calendar = require('./component/Calendar');
 var List = require('./component/List');
 var Photo = require('./component/Photo');
 
 var routes = (
     <Route name="app" path="/" handler={App}>
-        <DefaultRoute name="cal" handler={Calender} />
+        <DefaultRoute name="cal" handler={Calendar} />
         <Route name="list" handler={List} />
         <Route name="photo" handler={Photo} />
     </Route>
