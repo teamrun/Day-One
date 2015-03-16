@@ -19,6 +19,7 @@
     "immutable": "^3.6.4",
     "jsx-loader": "^0.12.2",
     "lunar-calendar": "^0.1.4",
+    "nedb": "^1.1.1",
     "node-jsx": "^0.12.4",
     "react": "^0.12.2",
     "react-router": "^0.12.4"
