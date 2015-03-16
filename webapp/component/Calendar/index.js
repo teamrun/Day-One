@@ -7,6 +7,7 @@ var Month = require('./CalendarMonth');
 
 var Cal = React.createClass({
     componentDidMount: function(){
+        // mount之后 滚动到当前的月份
         var thisMonthEle = this.refs[this.thisMonthRef].getDOMNode();
         this.ele = this.getDOMNode();
         if(thisMonthEle.offsetParent == document.body){
@@ -25,7 +26,7 @@ var Cal = React.createClass({
 
         this.thisMonthRef = thisYear+'-'+thisMonth;
 
-        var monthArr = Range(thisMonth-6, thisMonth+6 ).toArray();
+        var monthArr = Range(thisMonth-6, thisMonth+4 ).toArray();
         var MonthNodes = monthArr.reverse().map(function(monthNumber){
             var month = monthNumber, year = thisYear;
             if(monthNumber <= 0){
