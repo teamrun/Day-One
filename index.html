@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Day One</title>
-    <script id="end-check">
+    <script id="en-check">
         var env;
         var assetsBasePath = '';
         try{
@@ -18,12 +18,14 @@
         }
     </script>
     <script>
+        // load style
         loadScript('/dist/style-bundle.js');
     </script>
 </head>
 <body>
     <div id="ctn"></div>
     <script>
+        // load tools & data-geter & main app file
         if(env == 'web'){
             loadScript('/vendor/jquery-1.8.3.js');
             loadScript('/serverUtil/web.js');
