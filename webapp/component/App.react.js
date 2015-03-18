@@ -7,6 +7,7 @@ var RouteHandler = Router.RouteHandler;
 
 
 
+
 var navItems = ['Cal', 'List', 'Photo'];
 
 var App = React.createClass({
@@ -17,8 +18,8 @@ var App = React.createClass({
     render: function(){
         var name = this.getRoutes().reverse()[0].name;
 
-        var nodes = navItems.map(function(item){
-            return <li><Link to={item.toLowerCase()} >{item}</Link></li>;
+        var nodes = navItems.map(function(item, index){
+            return <li key={index}><Link to={item.toLowerCase()} >{item}</Link></li>;
         });
         /*<TransitionGroup component="main" transitionName="viewChange">
                     <RouteHandler key={name}/>

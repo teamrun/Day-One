@@ -71,6 +71,49 @@ var util = {
     },
     makeDoubel: function(n){
         return (n>=10)? String(n) : '0'+n;
+    },
+    monthRangeTS: function(year, month, amount){
+
+        var t1 = year + '-' + (month) + '-1 00:00:00';
+
+        var t2;
+        var t2Month = month + amount;
+        if(t2Month <= 0){
+            var yearMinus = 1;
+            while( !(t2Month>=1 && t2Month<=12) ){
+                t2Month += yearMinus*12;
+                yearMinus++;
+            }
+            t2 = (year - yearMinus) + '-' + t2Month + '-1 00:00:00';
+        }
+        else if(t2Month>12){
+            var yearPlus = 1;
+            while( !(t2Month>=1 && t2Month<=12) ){
+                t2Month -= yearMinus*12;
+                yearMinus++;
+            }
+            t2 = (year + yearPlus) + '-' + t2Month + '-1 00:00:00';
+        }
+        else{
+            t2 = year + '-' + t2Month + '-1 00:00:00';
+        }
+
+        // console.log(t1)
+        // console.log(t2)
+        var ts1 = (new Date(t1)).valueOf();
+        var ts2 = (new Date(t2)).valueOf();
+
+        if(ts1 > ts2){
+            var tmp = ts1;
+            ts1 = ts2;
+            ts2 = tmp;
+        }
+
+        // console.log(ts)
+        return {
+            start: ts1,
+            end: ts2
+        }
     }
 };
 

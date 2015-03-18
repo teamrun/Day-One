@@ -8,7 +8,7 @@ var WeekBar = React.createClass({
 
     render: function() {
         var days = dayTexts.map(function(dayText){
-            return <span className="day-name">{dayText}</span>;
+            return <span className="day-name" key={dayText}>{dayText}</span>;
         });
         return (
             <div className="cal-weekbar">

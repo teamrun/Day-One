@@ -15,12 +15,16 @@
   "license": "mit",
   "dependencies": {
     "classnames": "^1.1.4",
+    "flux": "^2.0.1",
     "gulp": "^3.8.11",
     "immutable": "^3.6.4",
     "jsx-loader": "^0.12.2",
+    "keymirror": "^0.1.1",
     "lunar-calendar": "^0.1.4",
+    "moment": "^2.9.0",
     "nedb": "^1.1.1",
     "node-jsx": "^0.12.4",
+    "object-assign": "^2.0.0",
     "react": "^0.12.2",
     "react-router": "^0.12.4"
   }
