@@ -3,9 +3,6 @@ var LunarCalendar = require('lunar-calendar');
 
 var Day = require('./CalendarDay');
 
-function makeDouble(n){
-    return n>=10? n.toString() : '0'+n;
-}
 
 function groupByDate(posts){
     var obj = {};
@@ -52,13 +49,15 @@ var Month = React.createClass({
         var monthData = LunarCalendar.calendar(year, month);
 
         var groupData = groupByDate(this.props.data);
+        // console.log(groupData);
 
         var nodes = monthData.monthData.map(function(dateData, index){
-            var dateStr = this.props.monthStr + '-' + makeDouble(dateData.day);
+            var dateStr = this.props.monthStr + '-' + dateData.day.pad();
+            var dayPosts = groupData[dateStr] || [];
             if(index == 0){
-                return <Day date={dateData.day} offset={monthData.firstDay} posts={groupData[dateStr]}/>;
+                return <Day date={dateData.day} offset={monthData.firstDay} posts={dayPosts}/>;
             }
-            return <Day date={dateData.day} posts={groupData[dateStr]}/>;
+            return <Day date={dateData.day} posts={dayPosts}/>;
         }.bind(this));
 
         return (

@@ -12,8 +12,6 @@ var Photo = require('./component/Photo');
 
 var Action = require('./flux/action');
 
-var serverUtil = require('./serverUtil');
-
 
 var routes = (
     <Route name="app" path="/" handler={App}>

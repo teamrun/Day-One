@@ -124,4 +124,9 @@ var util = {
 });
 
 
+Number.prototype.pad = function(){
+    return (this >= 10)? String(this) : '0' + this;
+}
+
+
 module.exports = util;

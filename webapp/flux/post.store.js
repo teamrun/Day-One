@@ -23,7 +23,10 @@ var PostStore = assign({}, EventEmitter.prototype, {
         var monthPosts = [];
         var start = monthStr + '-01';
         var arr = monthStr.split('-');
-        var end = arr[0] + '-' + (arr[1] + 1) + '-01'
+        var end = arr[0] + '-' + (Number(arr[1]) + 1).pad() + '-01'
+        
+        // console.log(monthStr, start, end);
+
         for(var i in _posts){
             var p = _posts[i];
             if(p.date >= start && p.ts < end){

@@ -3,11 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Day One</title>
-    <link rel="stylesheet" href="./assets/layout/layout.css"/>
-    <!-- // <script src="webapp/verndor/jquery-1.8.3.js"></script> -->
+    <script id="end-check">
+        var env;
+        var assetsBasePath = '';
+        try{
+            if(process){ env = 'atom'; assetsBasePath= './webapp'; }
+        }
+        catch(err){ env = 'web'; }
+        var loadScript = function(fileSrc){
+            var tag = document.createElement('script');
+            tag.src = assetsBasePath + fileSrc;
+            var tagCtn = (document.body)? document.body : document.head;
+            tagCtn.appendChild(tag);
+        }
+    </script>
+    <script>
+        loadScript('/dist/style-bundle.js');
+    </script>
 </head>
 <body>
     <div id="ctn"></div>
-    <script src="./webapp/atom-web.js"></script>
+    <script>
+        if(env == 'web'){
+            loadScript('/vendor/jquery-1.8.3.js');
+            loadScript('/serverUtil/web.js');
+            loadScript('/dist/app-bundle.js');
+        }
+        else{
+            var tag = document.createElement('script');
+            tag.innerHTML = "require('node-jsx').install();\nthis.serverUtil = require('./webapp/serverUtil/node');\nrequire('./webapp/app');";
+            document.body.appendChild(tag);
+        }
+    </script>
 </body>
 </html>

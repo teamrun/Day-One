@@ -1,7 +1,7 @@
 {
-  "name": "start-kit",
+  "name": "atom-day-one",
   "version": "0.0.1",
-  "description": "start kit",
+  "description": "day one app build with atom-shell and reactjs",
   "main": "main.js",
   "repository": {
     "type": "git",
@@ -9,23 +9,34 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "server": "node node/server.js",
+    "server-dev": "node-dev node/server.js",
+    "dev": "webpack -d -w"
   },
   "author": "",
   "license": "mit",
   "dependencies": {
     "classnames": "^1.1.4",
+    "css-loader": "^0.9.1",
     "flux": "^2.0.1",
-    "gulp": "^3.8.11",
     "immutable": "^3.6.4",
     "jsx-loader": "^0.12.2",
     "keymirror": "^0.1.1",
+    "koa": "^0.18.1",
+    "koa-better-body": "^1.0.17",
+    "koa-router": "^4.2.0",
+    "koa-static-cache": "^3.0.2",
+    "less": "^2.4.0",
+    "less-loader": "^2.1.0",
     "lunar-calendar": "^0.1.4",
     "moment": "^2.9.0",
     "nedb": "^1.1.1",
     "node-jsx": "^0.12.4",
     "object-assign": "^2.0.0",
+    "postcss": "^4.0.6",
+    "postcss-loader": "^0.3.0",
     "react": "^0.12.2",
-    "react-router": "^0.12.4"
+    "react-router": "^0.12.4",
+    "style-loader": "^0.8.3"
   }
 }

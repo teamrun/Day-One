@@ -7,9 +7,6 @@ var Store = require('../../flux/post.store');
 var WeekBar = require('./WeekBar');
 var Month = require('./CalendarMonth');
 
-function makeDouble(n){
-    return n<10? '0'+n:String(n);
-}
 
 var Cal = React.createClass({
     getDefaultProps: function(){
@@ -27,16 +24,16 @@ var Cal = React.createClass({
             otherMonth = thisMonth - i;
             yearOffset = Math.ceil(otherMonth/12) - 1;
             otherMonth += -yearOffset*12;
-            months.push((thisYear+yearOffset) + '-' + makeDouble(otherMonth));
+            months.push((thisYear+yearOffset) + '-' + otherMonth.pad());
         }
         
-        months.push(thisYear + '-' + makeDouble(thisMonth));
+        months.push(thisYear + '-' + thisMonth.pad());
 
         for(var i=1; i<=afterOffset; i++){
             otherMonth = thisMonth + i;
             yearOffset = Math.floor(otherMonth/12);
             otherMonth = (otherMonth%12);
-            months.push((thisYear+yearOffset) + '-' + makeDouble(otherMonth));
+            months.push((thisYear+yearOffset) + '-' + otherMonth.pad());
         }
 
         
@@ -73,7 +70,7 @@ var Cal = React.createClass({
         var thisYear  = now.getFullYear();
         var thisMonth = now.getMonth()+1;
         
-        this.thisMonthRef = thisYear + '-' + makeDouble(thisMonth);
+        this.thisMonthRef = thisYear + '-' + thisMonth.pad();
 
 
         var MonthNodes = this.state.months.reverse().map(function(monthStr, index){
