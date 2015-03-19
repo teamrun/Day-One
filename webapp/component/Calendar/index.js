@@ -16,8 +16,8 @@ var Cal = React.createClass({
         var thisMonth = now.getMonth()+1;
         var today     = now.getDate();
 
-        // var afterOffset = 3;
-        var afterOffset = 0;
+        var afterOffset = 3;
+        // var afterOffset = 0;
         var beforeOffset = 8;
         var otherMonth, yearOffset;
 
@@ -39,15 +39,16 @@ var Cal = React.createClass({
 
         
         return {
-            months: months.reverse(),
-            datas: []
+            months: months.reverse()
         }
     },
     getInitialState: function() {
         // console.log(this.props.months);
         return {
             months: this.props.months,
-            datas: this.props.datas
+            datas: this.props.months.map(function(monthStr){
+                return Store.getOneMonthPost(monthStr);
+            })
         };
     },
     componentDidMount: function(){
