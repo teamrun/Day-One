@@ -29,13 +29,13 @@
         if(env == 'web'){
             loadScript('/vendor/jquery-1.8.3.js');
             loadScript('/serverUtil/web.js');
-            loadScript('/dist/app-bundle.js');
         }
         else{
             var tag = document.createElement('script');
-            tag.innerHTML = "require('node-jsx').install();\nthis.serverUtil = require('./webapp/serverUtil/node');\nrequire('./webapp/app');";
+            tag.innerHTML = "this.serverUtil = require('./webapp/serverUtil/node');";
             document.body.appendChild(tag);
         }
+        loadScript('/dist/app-bundle.js');
     </script>
 </body>
 </html>

@@ -89,6 +89,7 @@ var Cal = React.createClass({
         );
     },
     getPostsOfEachMonth: function(){
+        console.log('store changed');
         var monthPostsArr = this.state.months.map(function(monthStr){
             return Store.getOneMonthPost(monthStr);
         });

@@ -30,7 +30,11 @@ var PostStore = assign({}, EventEmitter.prototype, {
         for(var i in _posts){
             var p = _posts[i];
             if(p.date >= start && p.date < end){
-                monthPosts.push(p);
+                monthPosts.push({
+                    _id: p._id,
+                    date: p.date,
+                    title: p.title
+                });
             }
         }
         return monthPosts;
@@ -56,6 +60,10 @@ Dispatcher.register(function(action){
             console.log('no action handler for:', action);
     }
 });
+
+// setTimeout(function(){
+//     PostStore.emitChange();
+// }, 10*1000);
 
 
 module.exports = PostStore;
