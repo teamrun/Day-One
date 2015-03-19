@@ -16,7 +16,8 @@ var Cal = React.createClass({
         var thisMonth = now.getMonth()+1;
         var today     = now.getDate();
 
-        var afterOffset = 3;
+        // var afterOffset = 3;
+        var afterOffset = 0;
         var beforeOffset = 8;
         var otherMonth, yearOffset;
 
@@ -38,7 +39,7 @@ var Cal = React.createClass({
 
         
         return {
-            months: months,
+            months: months.reverse(),
             datas: []
         }
     },
@@ -73,7 +74,7 @@ var Cal = React.createClass({
         this.thisMonthRef = thisYear + '-' + thisMonth.pad();
 
 
-        var MonthNodes = this.state.months.reverse().map(function(monthStr, index){
+        var MonthNodes = this.state.months.map(function(monthStr, index){
             return (
                 <Month monthStr={monthStr} data={this.state.datas[index] || []} key={monthStr} ref={monthStr}>
                 </Month>

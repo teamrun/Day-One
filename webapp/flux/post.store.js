@@ -29,7 +29,7 @@ var PostStore = assign({}, EventEmitter.prototype, {
 
         for(var i in _posts){
             var p = _posts[i];
-            if(p.date >= start && p.ts < end){
+            if(p.date >= start && p.date < end){
                 monthPosts.push(p);
             }
         }

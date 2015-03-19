@@ -7,8 +7,8 @@
             var end = new Date(endDate + ' 00:00:00');
             // BlogModel.getBetween(start.valueOf(), end.valueOf(), callback);
             var param = {
-                start: start,
-                end: end
+                start: start.valueOf(),
+                end: end.valueOf()
             }
             $.getJSON('/api/blog/between', param, function(data, status){
                 callback(null, data.data);
