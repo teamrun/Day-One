@@ -9,6 +9,7 @@ var Route = Router.Route;
 var Calendar = require('./component/Calendar');
 var List = require('./component/List');
 var Photo = require('./component/Photo');
+var Post = require('./component/Post');
 
 var Action = require('./flux/action');
 
@@ -18,6 +19,7 @@ var routes = (
         <DefaultRoute name="cal" handler={Calendar} />
         <Route name="list" handler={List} />
         <Route name="photo" handler={Photo} />
+        <Route name="post" path="/post/:postId" handler={Post} />
     </Route>
 );
 

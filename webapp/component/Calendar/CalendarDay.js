@@ -15,8 +15,22 @@ function bgcGen(amount){
 }
 
 var Day = React.createClass({
+    propTypes: {
+        hoverHandler: React.PropTypes.func,
+        leaveHandler: React.PropTypes.func
+    },
+    getDefaultProps: function() {
+        return {
+            hoverHandler: function(){},
+            leaveHandler: function(){}
+        };
+    },
     componentDidMount: function() {
+        this.ele = this.getDOMNode();
         // console.log(this.props.posts.length)
+    },
+    componentDidUpdate: function(prevProps, prevState) {
+        // console.log('day updated')
     },
     render: function(){
         var classes = 'cal-day';
@@ -24,15 +38,30 @@ var Day = React.createClass({
             classes += ' day-'+this.props.offset;
         }
         count += this.props.posts.length;
-        console.log(count)
+        // console.log(count)
         var style = {
             backgroundColor: bgcGen(this.props.posts.length)
         };
         return (
-            <div className={classes} style={style}>
+            <div className={classes} style={style}
+                onMouseEnter={this.mouseEnter}
+                onMouseLeave={this.mouseLeave}
+                >
                 {this.props.date}
             </div>
         );
+    },
+    mouseEnter: function(){
+        clearTimeout(this.leaveTimer);
+        this.enterTimer = setTimeout(function(){
+            this.props.hoverHandler(this.ele);
+        }.bind(this), 80);
+    },
+    mouseLeave: function(){
+        clearTimeout(this.enterTimer);
+        this.leaveTimer = setTimeout(function(){
+            this.props.leaveHandler();
+        }.bind(this), 50);
     }
 });
 

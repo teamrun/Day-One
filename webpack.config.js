@@ -7,8 +7,7 @@ module.exports = {
         path: './webapp/dist',
         filename: '[name]-bundle.js'
     },
-    // devtool: 'inline-source-map',
-    devtool: 'eval',
+    devtool: 'source-map',
     module: {
         loaders: [
             {tests: /\.js$/, loaders: ['jsx?harmony'] },

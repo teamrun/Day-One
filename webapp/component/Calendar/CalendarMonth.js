@@ -54,10 +54,17 @@ var Month = React.createClass({
         var nodes = monthData.monthData.map(function(dateData, index){
             var dateStr = this.props.monthStr + '-' + dateData.day.pad();
             var dayPosts = groupData[dateStr] || [];
-            if(index == 0){
-                return <Day date={dateData.day} offset={monthData.firstDay} posts={dayPosts}/>;
-            }
-            return <Day date={dateData.day} posts={dayPosts}/>;
+            var offset = (index == 0)? monthData.firstDay : false;
+            return (
+                <Day 
+                    date={dateData.day}
+                    offset={offset}
+                    posts={dayPosts}
+                    hoverHandler={this.props.showPopover}
+                    leaveHandler={this.props.hidePopover}
+                    >
+                </Day>
+            );
         }.bind(this));
 
         return (

@@ -6,6 +6,7 @@ var Store = require('../../flux/post.store');
 
 var WeekBar = require('./WeekBar');
 var Month = require('./CalendarMonth');
+var Popover = require('../Popover');
 
 
 var Cal = React.createClass({
@@ -52,6 +53,7 @@ var Cal = React.createClass({
         };
     },
     componentDidMount: function(){
+        this.ele = this.getDOMNode();
         Store.addChangeListener(this.getPostsOfEachMonth);
 
         // mount之后 滚动到当前的月份
@@ -66,6 +68,7 @@ var Cal = React.createClass({
     },
     componentWillUnmount: function() {
         Store.removeChangeListener(this.getPostsOfEachMonth);
+        console.log('calendar component unmount');
     },
     render: function(){
         var now = new Date();
@@ -77,13 +80,20 @@ var Cal = React.createClass({
 
         var MonthNodes = this.state.months.map(function(monthStr, index){
             return (
-                <Month monthStr={monthStr} data={this.state.datas[index] || []} key={monthStr} ref={monthStr}>
+                <Month monthStr={monthStr}
+                    data={this.state.datas[index] || []}
+                    key={monthStr}
+                    ref={monthStr}
+                    showPopover={this._showPopover}
+                    hidePopover={this._hidePopover}
+                    >
                 </Month>
             );
         }.bind(this));
         return (
             <div className="calendar-view">
                 <WeekBar />
+                <Popover ref="popover" />
                 {MonthNodes}
             </div>
         );
@@ -96,6 +106,15 @@ var Cal = React.createClass({
         this.setState({
             datas: monthPostsArr
         });
+    },
+    _showPopover: function(dayEle){
+        this.refs.popover.show().update({
+            baseEle: dayEle
+        });
+    },
+    // _updatePopover
+    _hidePopover: function(){
+        this.refs.popover.hide();
     }
 });
 
