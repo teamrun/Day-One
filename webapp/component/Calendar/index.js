@@ -61,12 +61,12 @@ var Cal = React.createClass({
         // mount之后 滚动到当前的月份
         var thisMonthEle = this.refs[this.thisMonthRef].getDOMNode();
         this.ele = this.getDOMNode();
-        if(thisMonthEle.offsetParent == document.body){
+        // if(thisMonthEle.offsetParent == document.body){
             console.log('need scroll to', thisMonthEle.offsetTop);
             var weekbarH = 26;
             // this.ele.parentNode.scrollTop = thisMonthEle.offsetTop;
             this.ele.parentNode.scrollTop = thisMonthEle.offsetTop - weekbarH - 5;
-        }
+        // }
     },
     componentWillUnmount: function() {
         Store.removeChangeListener(this.getPostsOfEachMonth);
@@ -109,7 +109,16 @@ var Cal = React.createClass({
             datas: monthPostsArr
         });
     },
-    _showPopover: function(dayEle){
+    _showPopover: function(dayEle, dayPosts){
+        // 没有posts就不弹出了
+        if(dayPosts.length <= 0){
+            this.hideTimer = setTimeout(function(){
+                this._hidePopover();
+            }.bind(this), 100);
+            return;
+        }
+        clearTimeout(this.hideTimer);
+
         var relativePos = feUtil.getOffset(dayEle, this.ele);
         var dayEleSize = {
             width: dayEle.offsetWidth,
@@ -119,10 +128,14 @@ var Cal = React.createClass({
             top: relativePos.top + dayEleSize.height,
             left: relativePos.left
         };
-        // console.log(relativePos);
+        
+        var content = dayPosts.map(function(p){
+            return <p className="cal-post">{p.title}</p>;
+        });
         this.refs.popover.show().update({
             // baseEle: dayEle
-            rectPos: popoverPos
+            rectPos: popoverPos,
+            content: content
         });
     },
     // _updatePopover

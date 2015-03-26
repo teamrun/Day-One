@@ -62,7 +62,7 @@ var Day = React.createClass({
     mouseEnter: function(){
         clearTimeout(timer.leave);
         timer.enter = setTimeout(function(){
-            this.props.hoverHandler(this.ele);
+            this.props.hoverHandler(this.ele, this.props.posts);
         }.bind(this), 80);
     },
     mouseLeave: function(){

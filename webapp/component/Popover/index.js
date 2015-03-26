@@ -4,9 +4,11 @@ var feUtil = require('../../util');
 
 var Popover = React.createClass({
     getInitialState: function() {
+        var defaultContent = <div>Popover</div>;
         return {
             active: false,
-            pos: {}
+            pos: {},
+            content: defaultContent
         };
     },
     render: function() {
@@ -20,12 +22,13 @@ var Popover = React.createClass({
         if(this.state.active){
             classes += ' active';
         }
+
         return (
             <div className={classes} style={style}
                 onMouseEnter={this._mouseEnter}
                 onMouseLeave={this._mouseLeave}
                 >
-                Popover
+                {this.state.content}
             </div>
         );
     },
@@ -50,6 +53,14 @@ var Popover = React.createClass({
     },
     update: function(opt){
         this.setPosition(opt);
+        if(opt.content){
+            this.setState({
+                content: opt.content
+            }, function(){
+                // 可以在内容更新之后, 计算popover的尺寸
+                // 然后更准确的更新popover的位置, 定位策略更优雅一点
+            });
+        }
     },
     setPosition: function(opt){
         if(opt.baseEle){
