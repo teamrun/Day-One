@@ -14,6 +14,14 @@ function bgcGen(amount){
     return greens[amount-1];
 }
 
+
+// 不能用组件内部的timer, 
+// 因为不同MonthDay Component是不同的实例, timer会不一样
+var timer = {
+    enter: undefined,
+    leave: undefined
+};
+
 var Day = React.createClass({
     propTypes: {
         hoverHandler: React.PropTypes.func,
@@ -52,14 +60,14 @@ var Day = React.createClass({
         );
     },
     mouseEnter: function(){
-        clearTimeout(this.leaveTimer);
-        this.enterTimer = setTimeout(function(){
+        clearTimeout(timer.leave);
+        timer.enter = setTimeout(function(){
             this.props.hoverHandler(this.ele);
         }.bind(this), 80);
     },
     mouseLeave: function(){
-        clearTimeout(this.enterTimer);
-        this.leaveTimer = setTimeout(function(){
+        clearTimeout(timer.enter);
+        timer.leave = setTimeout(function(){
             this.props.leaveHandler();
         }.bind(this), 50);
     }

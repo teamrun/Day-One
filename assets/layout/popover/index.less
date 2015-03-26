@@ -1,16 +1,32 @@
 .popover{
     position: absolute;
+    top: 0;
+    left: 0;
     padding: 1em;
     z-index: 1200;
+    background-color: #f0f0f0;
+
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+
+    transition: transform 150ms ease;
+
+    &.active{
+        visibility: visible;
+        height: auto;
+        max-height: 600px;
+        overflow: auto;
+    }
 
     &:before{
         content: '';
-        border-width: 20px;
+        border-width: 10px;
         border-style: solid;
         border-color: transparent;
         border-bottom-color: #f5f5f5;
         position: absolute;
-        top: -20px*2;
+        top: -10px*2;
         left: 40px;
     }
 }

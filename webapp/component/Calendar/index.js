@@ -8,6 +8,8 @@ var WeekBar = require('./WeekBar');
 var Month = require('./CalendarMonth');
 var Popover = require('../Popover');
 
+var feUtil = require('../../util');
+
 
 var Cal = React.createClass({
     getDefaultProps: function(){
@@ -108,8 +110,19 @@ var Cal = React.createClass({
         });
     },
     _showPopover: function(dayEle){
+        var relativePos = feUtil.getOffset(dayEle, this.ele);
+        var dayEleSize = {
+            width: dayEle.offsetWidth,
+            height: dayEle.offsetHeight
+        };
+        var popoverPos = {
+            top: relativePos.top + dayEleSize.height,
+            left: relativePos.left
+        };
+        // console.log(relativePos);
         this.refs.popover.show().update({
-            baseEle: dayEle
+            // baseEle: dayEle
+            rectPos: popoverPos
         });
     },
     // _updatePopover

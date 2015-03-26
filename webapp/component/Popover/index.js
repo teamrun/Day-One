@@ -12,23 +12,43 @@ var Popover = React.createClass({
     render: function() {
         var pos = this.state.pos
         var style = {
-            left: pos.left,
-            top: pos.top
+            // left: pos.left,
+            // top: pos.top
+            transform: 'translate('+pos.left+'px, '+pos.top+'px)'
         };
+        var classes = 'popover';
+        if(this.state.active){
+            classes += ' active';
+        }
         return (
-            <div className="popover" style={style}>
+            <div className={classes} style={style}
+                onMouseEnter={this._mouseEnter}
+                onMouseLeave={this._mouseLeave}
+                >
                 Popover
             </div>
         );
     },
+    _mouseEnter: function(){
+        this.keepShow = true;
+    },
+    _mouseLeave: function(){
+        this.keepShow = false;
+        this.leaveSelfHideTimer = setTimeout(function(){
+            this.setState({
+                active: false
+            });
+        }.bind(this), 250);
+        
+    },
     show: function(){
+        clearTimeout(this.leaveSelfHideTimer);
         this.setState({
             active: true
         });
         return this;
     },
     update: function(opt){
-        console.log(arguments);
         this.setPosition(opt);
     },
     setPosition: function(opt){
@@ -41,12 +61,21 @@ var Popover = React.createClass({
                     top: baseEleOffset.top
                 }
             });
+            return;
+        }
+        if(opt.rectPos){
+            this.setState({
+                pos: opt.rectPos
+            });
+            return;
         }
     },
     hide: function(){
-        this.setState({
-            active: false
-        });
+        if(!this.keepShow){
+            this.setState({
+                active: false
+            });
+        }
     }
 });
 
