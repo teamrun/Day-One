@@ -10,24 +10,27 @@
             if(process){ env = 'atom'; assetsBasePath= './webapp'; }
         }
         catch(err){ env = 'web'; }
-        var loadScript = function(fileSrc, callback){
-            var tag = document.createElement('script');
-            tag.src = assetsBasePath + fileSrc;
+        var loadScript = function(fileSrc){
+            return new Promise(function(resolve, reject){
+                var tag = document.createElement('script');
+                tag.src = assetsBasePath + fileSrc;
 
-            if(callback instanceof Function){
-                tag.onload = callback
-            }
-            var tagCtn = (document.body)? document.body : document.head;
-            tagCtn.appendChild(tag);
+                tag.onload = function(){
+                    resolve(fileSrc);
+                }
+                var tagCtn = (document.body)? document.body : document.head;
+                tagCtn.appendChild(tag);
+            })
         }
     </script>
     <script>
-        loadScript('/vendor/jquery-1.8.3.js');
-        loadScript('/vendor/react-with-addons.js', function(){
+        var p$ = loadScript('/vendor/jquery-1.8.3.js');
+        var pReact = loadScript('/vendor/react-with-addons.js');
+
+        // promise都完成后加载余下的程序代码
+        Promise.all([p$, pReact]).then(function(){
             loadScript('/dist/style-bundle.js');
             if(env == 'web'){
-                // 依赖于jquery
-                // 这样的情况下一般jquery先加载完, 然后react加载完 然后加载web.js
                 loadScript('/serverUtil/web.js');
             }
             else{
@@ -36,7 +39,7 @@
                 document.body.appendChild(tag);
             }
             loadScript('/dist/app-bundle.js');
-        });
+        })
     </script>
 
 </head>
