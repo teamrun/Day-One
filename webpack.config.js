@@ -13,5 +13,9 @@ module.exports = {
             {tests: /\.js$/, loaders: ['jsx?harmony'] },
             { test: /\.less$/, loaders: ['style-loader', 'css-loader', 'less-loader'] }
         ]
+    },
+    externals:{
+        react: 'React',
+        'react/lib/ReactWithAddons': 'React'
     }
 }

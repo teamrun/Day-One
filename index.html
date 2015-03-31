@@ -10,32 +10,54 @@
             if(process){ env = 'atom'; assetsBasePath= './webapp'; }
         }
         catch(err){ env = 'web'; }
-        var loadScript = function(fileSrc){
+        var loadScript = function(fileSrc, callback){
             var tag = document.createElement('script');
             tag.src = assetsBasePath + fileSrc;
+
+            if(callback instanceof Function){
+                tag.onload = callback
+            }
             var tagCtn = (document.body)? document.body : document.head;
             tagCtn.appendChild(tag);
         }
     </script>
     <script>
-        // load style
-        loadScript('/dist/style-bundle.js');
+        loadScript('/vendor/jquery-1.8.3.js');
+        loadScript('/vendor/react-with-addons.js', function(){
+            loadScript('/dist/style-bundle.js');
+            if(env == 'web'){
+                // 依赖于jquery
+                // 这样的情况下一般jquery先加载完, 然后react加载完 然后加载web.js
+                loadScript('/serverUtil/web.js');
+            }
+            else{
+                var tag = document.createElement('script');
+                tag.innerHTML = "this.serverUtil = require('./webapp/serverUtil/node');";
+                document.body.appendChild(tag);
+            }
+            loadScript('/dist/app-bundle.js');
+        });
     </script>
+
 </head>
 <body>
     <div id="ctn"></div>
     <script>
+        // load style
+        // loadScript('/dist/style-bundle.js');
+    </script>
+    <script>
         // load tools & data-geter & main app file
-        if(env == 'web'){
-            loadScript('/vendor/jquery-1.8.3.js');
-            loadScript('/serverUtil/web.js');
-        }
-        else{
-            var tag = document.createElement('script');
-            tag.innerHTML = "this.serverUtil = require('./webapp/serverUtil/node');";
-            document.body.appendChild(tag);
-        }
-        loadScript('/dist/app-bundle.js');
+        // if(env == 'web'){
+        //     loadScript('/vendor/jquery-1.8.3.js');
+        //     loadScript('/serverUtil/web.js');
+        // }
+        // else{
+        //     var tag = document.createElement('script');
+        //     tag.innerHTML = "this.serverUtil = require('./webapp/serverUtil/node');";
+        //     document.body.appendChild(tag);
+        // }
+        // loadScript('/dist/app-bundle.js');
     </script>
 </body>
 </html>
