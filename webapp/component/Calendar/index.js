@@ -3,6 +3,7 @@ var Immutable = require('immutable');
 var Range = Immutable.Range;
 
 var Store = require('../../flux/post.store');
+var Link = require('react-router').Link;
 
 var WeekBar = require('./WeekBar');
 var Month = require('./CalendarMonth');
@@ -81,6 +82,7 @@ var Cal = React.createClass({
 
 
         var MonthNodes = this.state.months.map(function(monthStr, index){
+            console.log(monthStr)
             return (
                 <Month monthStr={monthStr}
                     data={this.state.datas[index] || []}
@@ -130,8 +132,25 @@ var Cal = React.createClass({
         };
         
         var content = dayPosts.map(function(p){
-            return <p className="cal-post">{p.title}</p>;
-        });
+            var param = {
+                date: p.date,
+                postid: p._id
+            };
+            // return (
+            //     <p className="cal-post">
+            //         <Link to="PostViewList" params={param}>{p.title}</Link>
+            //     </p>
+            // );
+            return (
+                <p className="cal-post"
+                    onClick={this.routeToDay}
+                    data-date={param.date}
+                    data-postid={param.postid}
+                    >
+                    {p.title}
+                </p>
+            );
+        }.bind(this));
         this.refs.popover.show().update({
             // baseEle: dayEle
             rectPos: popoverPos,
@@ -141,6 +160,13 @@ var Cal = React.createClass({
     // _updatePopover
     _hidePopover: function(){
         this.refs.popover.hide();
+    },
+    routeToDay: function(e){
+        var postEle = e.target;
+        var date = postEle.dataset['date'], postId = postEle.dataset['postid'];
+        console.log(date);
+        console.log(postId);
+        window.location.hash = '#/day/'+date + '/'+postId;
     }
 });
 

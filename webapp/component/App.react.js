@@ -11,12 +11,14 @@ var RouteHandler = Router.RouteHandler;
 var navItems = ['Cal', 'List', 'Photo'];
 
 var App = React.createClass({
-    mixins: [ Router.State ],
+    contextTypes: {
+        router: React.PropTypes.func
+    },
     componentDidMount: function(){
         console.timeEnd('Confirmed env -> Load-done spend');
     },
     render: function(){
-        var name = this.getRoutes().reverse()[0].name;
+        var name = this.context.router.getCurrentPath();
 
         var nodes = navItems.map(function(item, index){
             return <li key={index}><Link to={item.toLowerCase()} >{item}</Link></li>;
