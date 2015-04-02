@@ -39,6 +39,16 @@ var PostStore = assign({}, EventEmitter.prototype, {
         }
         return monthPosts;
     },
+    getPostsByDate: function(date){
+        var posts = [];
+        for(var i in _posts){
+            var p = _posts[i];
+            if(p.date === date){
+                posts.push(p);
+            }
+        }
+        return posts;
+    },
     emitChange: function(){
         this.emit('change');
     },
