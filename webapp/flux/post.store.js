@@ -19,7 +19,7 @@ function pushPosts(posts){
 }
 
 var PostStore = assign({}, EventEmitter.prototype, {
-    getOneMonthPost: function(monthStr){
+    getPostsByMonth: function(monthStr){
         var monthPosts = [];
         var start = monthStr + '-01';
         var arr = monthStr.split('-');

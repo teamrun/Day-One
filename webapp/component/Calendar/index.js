@@ -51,7 +51,7 @@ var Cal = React.createClass({
         return {
             months: this.props.months,
             datas: this.props.months.map(function(monthStr){
-                return Store.getOneMonthPost(monthStr);
+                return Store.getPostsByMonth(monthStr);
             })
         };
     },
@@ -105,7 +105,7 @@ var Cal = React.createClass({
     getPostsOfEachMonth: function(){
         console.log('store changed');
         var monthPostsArr = this.state.months.map(function(monthStr){
-            return Store.getOneMonthPost(monthStr);
+            return Store.getPostsByMonth(monthStr);
         });
         this.setState({
             datas: monthPostsArr
