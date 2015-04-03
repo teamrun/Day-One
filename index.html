@@ -3,64 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Day One</title>
-    <script id="en-check">
-        var env;
-        var assetsBasePath = '';
-        try{
-            if(process){ env = 'atom'; assetsBasePath= './webapp'; }
-        }
-        catch(err){ env = 'web'; }
-        var loadScript = function(fileSrc){
-            return new Promise(function(resolve, reject){
-                var tag = document.createElement('script');
-                tag.src = assetsBasePath + fileSrc;
-
-                tag.onload = function(){
-                    resolve(fileSrc);
-                }
-                var tagCtn = (document.body)? document.body : document.head;
-                tagCtn.appendChild(tag);
-            })
-        }
-    </script>
-    <script>
-        var p$ = loadScript('/vendor/jquery-1.8.3.js');
-        var pReact = loadScript('/vendor/react-with-addons.js');
-
-        // promise都完成后加载余下的程序代码
-        Promise.all([p$, pReact]).then(function(){
-            loadScript('/dist/style-bundle.js');
-            if(env == 'web'){
-                loadScript('/serverUtil/web.js');
-            }
-            else{
-                var tag = document.createElement('script');
-                tag.innerHTML = "this.serverUtil = require('./webapp/serverUtil/node');";
-                document.body.appendChild(tag);
-            }
-            loadScript('/dist/app-bundle.js');
-        })
-    </script>
-
+    <script src="/webapp/vendor/jquery-1.8.3.js"></script>
 </head>
 <body>
-    <div id="ctn"></div>
+    <div id="ctn">
+        
+    </div>
     <script>
-        // load style
-        // loadScript('/dist/style-bundle.js');
+        // promise都完成后加载余下的程序代码
+        // p$.then(function(){
+        //     loadScript('/webapp/dist/style-bundle.js');
+        //     if(env == 'web'){
+        //         loadScript('/webapp/serverUtil/web.js');
+        //     }
+        //     else{
+        //         var tag = document.createElement('script');
+        //         tag.innerHTML = "this.serverUtil = require('./webapp/serverUtil/node');";
+        //         document.body.appendChild(tag);
+        //     }
+        //     loadScript('/webapp/dist/app-bundle.js');
+        // })
     </script>
-    <script>
-        // load tools & data-geter & main app file
-        // if(env == 'web'){
-        //     loadScript('/vendor/jquery-1.8.3.js');
-        //     loadScript('/serverUtil/web.js');
-        // }
-        // else{
-        //     var tag = document.createElement('script');
-        //     tag.innerHTML = "this.serverUtil = require('./webapp/serverUtil/node');";
-        //     document.body.appendChild(tag);
-        // }
-        // loadScript('/dist/app-bundle.js');
-    </script>
+    <script src="/webapp/dist/style-bundle.js"></script>
+    <script src="/webapp/serverUtil/web.js"></script>
+    <script src="/webapp/dist/app-bundle.js"></script>
 </body>
 </html>

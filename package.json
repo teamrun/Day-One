@@ -9,9 +9,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node node/server.js",
-    "server-dev": "node-dev node/server.js",
-    "dev": "webpack -d -w"
+    "server": "node server.js",
+    "server-dev": "node-dev server.js",
+    "deploy": "webpack -p"
   },
   "author": "",
   "license": "mit",
@@ -22,10 +22,6 @@
     "immutable": "^3.6.4",
     "jsx-loader": "^0.12.2",
     "keymirror": "^0.1.1",
-    "koa": "^0.18.1",
-    "koa-better-body": "^1.0.17",
-    "koa-router": "^4.2.0",
-    "koa-static-cache": "^3.0.2",
     "less": "^2.4.0",
     "less-loader": "^2.1.0",
     "lunar-calendar": "^0.1.4",
@@ -36,7 +32,9 @@
     "postcss": "^4.0.6",
     "postcss-loader": "^0.3.0",
     "react": "^0.12.2",
+    "react-hot-loader": "^1.2.4",
     "react-router": "^0.13.2",
-    "style-loader": "^0.8.3"
+    "style-loader": "^0.8.3",
+    "webpack-dev-server": "^1.8.0"
   }
 }
